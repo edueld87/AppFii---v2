@@ -10,10 +10,10 @@ import javax.validation.constraints.NotEmpty;
 public class Convidado {
 	
 	@Id
-	@NotBlank
-	private String rg;
 	@NotEmpty
 	private String nomeConvidado;
+	@NotBlank
+	private String rg;
 	
 	private double proventos;
 	
@@ -29,7 +29,7 @@ public class Convidado {
 	public double getProventos() {
 		return proventos;
 	}
-	public void setProventos(float proventos) {
+	public void setProventos(double proventos) {
 		this.proventos = proventos;
 	}
 	public String getNomeConvidado() {

@@ -76,21 +76,27 @@ public class EventoController {
 	}
 
 	@RequestMapping(value ="/{codigo}", method = RequestMethod.POST)
-	public String detalhesEventoPost(@PathVariable("codigo") long codigo, @Valid Convidado convidado, BindingResult result,
-			RedirectAttributes attributes) {
-		if(result.hasErrors()) {
-			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			return "redirect:/{codigo}";
-		}
+    public String detalhesEventoPost(@PathVariable("codigo") long codigo, @Valid Convidado convidado, BindingResult result,
+            RedirectAttributes attributes) {
+        if(result.hasErrors()) {
+            attributes.addFlashAttribute("mensagem", "Verifique os campos!");
+            return "redirect:/{codigo}";
+        }
 
-		Evento evento = er.findByCodigo(codigo);
-		//double proventos = convidado.getProventos();
-		//Double prov = Double.valueOf(null)
-		convidado.setEvento(evento);
-		cr.save(convidado);
-		attributes.addFlashAttribute("mensagem", "FII adicionado com sucesso!");
-		return "redirect:/{codigo}";
-	}
+ 
+
+        Evento evento = er.findByCodigo(codigo);
+        
+        //double proventos = convidado.getProventos();
+        //Double prov = Double.valueOf(null)
+        convidado.setEvento(evento);
+        TabelaFii tf = tr.findByCODIGO(convidado.getNomeConvidado());
+        double resultado = Double.parseDouble(convidado.getRg()) * tf.getDIVIDENDO();
+        convidado.setProventos(resultado);
+        cr.save(convidado);
+        attributes.addFlashAttribute("mensagem", "FII adicionado com sucesso!");
+        return "redirect:/{codigo}";
+    }
 
 	@RequestMapping("/deletarEvento")
 	public String deletarEvento(long codigo) {

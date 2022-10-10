@@ -15,7 +15,7 @@ import com.entra21.eventoapp.models.TabelaFii;
 
 		void save(@Valid Evento evento); 
 		
-		List<TabelaFii> findByCODIGO(String CODIGO);
+	//	List<TabelaFii> findByCODIGO(String CODIGO);
 		
-//		TabelaFii findByCodigo(String CODIGO);
+		TabelaFii findByCODIGO(String CODIGO);
 }
