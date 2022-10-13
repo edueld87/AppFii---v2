@@ -12,6 +12,7 @@
 	      <link rel="stylesheet" href="style/styleCss.css"/>
 	      
 	      
+	      
 	<title>EventoApp</title>
 	</head>
 	<body bgcolor= #bdbdbd>
@@ -50,12 +51,12 @@
 	    </form>
 	   </div>
 	   
-	   <div>
+	 <!--   <div>
 	   <form name="Cadastro Fii" method="GET">	
 	   	<fieldset>
 	   		<legend>Selecione o fundo:</legend>
 			 <!--      <label for="" >Selecione o seu FII:</label> -->
-			   <select name="Fundos" id="FundosFii" multiple size="3">
+			  <!--   <select name="Fundos" id="FundosFii" multiple size="3">
 			    <option value ="BRCR11" selected>BRCR11</option>
 			    <option value ="ALZR11">ALZR11</option>
 			    <option value ="HGLG11">HGLG11</option>
@@ -64,15 +65,46 @@
 			    </fieldset>
 			    <br>
 			    </form>
-					</div>
+					</div> -->
+					
 
-		<table class = "container tabelaConvidado">
+<style>
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+
+<div class="dropdown">
+  <span>Mouse over me</span>
+  <div class="dropdown-content">
+    <p>Hello World!</p>
+  </div>
+</div>
+					
+
+		<table class = "container tabelaConvidado" id="convidados11">
 		<h5>Lista de Fii´s:</h5>
 	            <thead>
 	                <tr>
 	                    <th>Código:</th>
 	                    <th>Cotas:</th>
 	                    <th>Proventos</th>
+	             <!--   <th>Soma</th> -->
 	                    <th>Deletar</th>
 	                    <th>Editar</th>
 	                </tr>
@@ -81,7 +113,8 @@
 	                <tr th:each="convidados : ${convidados}">
 	                    <td><span th:text="${convidados.nomeConvidado}"></span></td>
 	                    <td><span th:text="${convidados.rg}"></span></td>
-	                    <td><span th:text="${convidados.proventos}"></span></td>
+	                    <td><span th:text="${convidados.proventos}" ></span></td>
+	                   <!-- <td><span th:text="${convidados.soma}"></span></td> -->
 	                    <td><a class="waves-effect waves-light btn.small"
 	                        th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidados.rg)).build()}"><i
 	                            class="material-icons left">delete</i></a></td>
@@ -89,11 +122,39 @@
 	                        th:href="${(#mvc.url('EC#editarConvidado').arg(0, evento.codigo).arg(1, convidados.rg)).build()}"><i
 	                            class="material-icons left">edit</i></a></td>   
 	                    </tr>
+	                    
+	                     
+	                 <!--   <script>
+	                    function updateSubTotal() {
+	                    var table = document.getElementById("convidados.proventos"),
+	                    sumVal = 0;
+	                  for (var i = 0; i < table.rows.length; i++) {
+	                    sumVal = sumVal + parseDouble(table.rows[i].cells[0].innerHTML);
+	                  }
+
+	                  document.getElementById("val").innerHTML = "SubTotal =" + sumVal;
+	                  console.log(sumVal);           
+	                    </script> -->
+	                    
+	                    
+	            <!--         <td><b>Total dividendos:</b></td>
+	                  <tr th:each="convidados : ${convidados}">     
+	              <td><span th:="${convidados.soma}"></span></td>
+	                    </tr> -->
+	                    
+	                    <tfoot>
+  						<tr>
+     					<td colspan="2">Dividendos</td>
+     			<td th:text="${#numbers.formatCurrency(#aggregates.sum(convidados.![proventos]))}"></td>
+  </tr>
+</tfoot>
+	                    
+	                    
 	            </tbody>
 	        </table>
+	        
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-	
 	</script>
 	</body>
 	</html>

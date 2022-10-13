@@ -17,6 +17,8 @@ public class Convidado {
 	
 	private double proventos;
 	
+	private double soma;
+	
 	@ManyToOne
 	private Evento evento;
 	
@@ -37,6 +39,14 @@ public class Convidado {
 	}
 	public void setNomeConvidado(String nomeConvidado) {
 		this.nomeConvidado = nomeConvidado;
+		
+		
+	}
+	public double getSoma() {
+		return soma;
+	}
+	public void setSoma(double soma) {
+		this.soma = soma;
 	}
 	public Evento getEvento() {
 		return evento;
