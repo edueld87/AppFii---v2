@@ -1,5 +1,7 @@
 package com.entra21.eventoapp.models;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -21,6 +23,12 @@ public class Convidado {
 	
 	private double cotacao;
 	
+	private double rentabilidade;
+	
+	private String setor;
+	
+	private double investido;
+	
 	@ManyToOne
 	private Evento evento;
 	
@@ -41,8 +49,13 @@ public class Convidado {
 	}
 	public void setNomeConvidado(String nomeConvidado) {
 		this.nomeConvidado = nomeConvidado;
-		
-		
+			
+	}
+	public String getSetor() {
+		return setor;
+	}
+	public void setSetor(String setor) {
+		this.setor = setor;
 	}
 	public double getSoma() {
 		return soma;
@@ -50,7 +63,18 @@ public class Convidado {
 	public void setSoma(double soma) {
 		this.soma = soma;
 		
-		
+	}
+	public double getInvestido() {
+		return investido;
+	}
+	public void setInvestido(double investido) {
+		this.investido = investido;
+	}
+	public double getRentabilidade() {
+		return rentabilidade;
+	}
+	public void setRentabilidade(double rentabilidade) {
+		this.rentabilidade = rentabilidade;
 	}
 	public double getCotacao() {
 		return cotacao;

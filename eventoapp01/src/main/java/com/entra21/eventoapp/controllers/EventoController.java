@@ -1,13 +1,11 @@
 package com.entra21.eventoapp.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -101,11 +99,26 @@ public class EventoController {
         TabelaFii tc = tr.findByCODIGO(convidado.getNomeConvidado());
         double valor = tc.getPRECO_ATUAL();
         convidado.setCotacao(valor);
+        TabelaFii to = tr.findByCODIGO(convidado.getNomeConvidado());
+        double rentabilidade = (tf.getDIVIDENDO() / tc.getPRECO_ATUAL() * 100);
+        BigDecimal res;
+        String ret = rentabilidade+"";
+        BigDecimal num = new BigDecimal(ret);
+        int newScale = 2;
+        res = num.setScale(newScale,2);
+        convidado.setRentabilidade(res.doubleValue());
+        TabelaFii se = tr.findByCODIGO(convidado.getNomeConvidado());
+        String setor = tf.getSETOR();
+        convidado.setSetor(setor);
+        double investido = Double.parseDouble(convidado.getRg()) * tc.getPRECO_ATUAL();
+        convidado.setInvestido(investido);
+        
+        
+       
         cr.save(convidado);
         attributes.addFlashAttribute("mensagem", "FII adicionado com sucesso!");
         return "redirect:/{codigo}";
     }
-	   
 	
 	@RequestMapping("/deletarEvento")
 	public String deletarEvento(long codigo) {
