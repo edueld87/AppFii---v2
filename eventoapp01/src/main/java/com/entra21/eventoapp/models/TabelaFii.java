@@ -72,7 +72,7 @@ public class TabelaFii implements Serializable {
 		return PRECO_ATUAL;
 	}
 
-	public void setPRECO_ATUAL(float PRECO_ATUAL) {
+	public void setPRECO_ATUAL(double PRECO_ATUAL) {
 		this.PRECO_ATUAL = PRECO_ATUAL;
 	}
 

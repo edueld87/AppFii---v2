@@ -18,4 +18,6 @@ import com.entra21.eventoapp.models.TabelaFii;
 	//	List<TabelaFii> findByCODIGO(String CODIGO);
 		
 		TabelaFii findByCODIGO(String CODIGO);
+	//	TabelaFii findByPRECO_ATUAL(String CODIGO);
+		
 }

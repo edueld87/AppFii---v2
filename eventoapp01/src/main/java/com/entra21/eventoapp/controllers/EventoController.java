@@ -1,9 +1,13 @@
 package com.entra21.eventoapp.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +21,6 @@ import com.entra21.eventoapp.models.TabelaFii;
 import com.entra21.eventoapp.repository.ConvidadoRepository;
 import com.entra21.eventoapp.repository.EventoRepository;
 import com.entra21.eventoapp.repository.TabelaFiiRepository;
-import java.util.Collection;
-import java.util.ArrayList;
 
 @Controller
 
@@ -96,9 +98,9 @@ public class EventoController {
         convidado.setProventos(resultado);
         soma += resultado;
         convidado.setSoma(soma);
-
-           
-              
+        TabelaFii tc = tr.findByCODIGO(convidado.getNomeConvidado());
+        double valor = tc.getPRECO_ATUAL();
+        convidado.setCotacao(valor);
         cr.save(convidado);
         attributes.addFlashAttribute("mensagem", "FII adicionado com sucesso!");
         return "redirect:/{codigo}";
@@ -193,6 +195,12 @@ public class EventoController {
 	
 	}
 	
+	
+//@ModelAttribute("fundos")
+//public List<TabelaFii> getFundos () {
+//	
+}
+	
 //	@RequestMapping(value = "/tabelaFii{CODIGO}", method = RequestMethod.GET)
 //	public List getCODIGO() {
 //		Iterable<TabelaFii> tabela = tr.findAll();
@@ -204,7 +212,7 @@ public class EventoController {
 //	@GetMapping("/editarConvidado{CODIGO}")
 //	public List<TabelaFii> getCODIGOFii (@PathVariable("CODIGO")) {
 //		return TabelaFiiRepository.findByCODIGO(CODIGO);
-	}
+	
 	
 
 	       

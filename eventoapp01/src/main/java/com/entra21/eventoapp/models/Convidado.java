@@ -19,6 +19,8 @@ public class Convidado {
 	
 	private double soma;
 	
+	private double cotacao;
+	
 	@ManyToOne
 	private Evento evento;
 	
@@ -47,6 +49,14 @@ public class Convidado {
 	}
 	public void setSoma(double soma) {
 		this.soma = soma;
+		
+		
+	}
+	public double getCotacao() {
+		return cotacao;
+	}
+	public void setCotacao(double cotacao) {
+		this.cotacao = cotacao;
 	}
 	public Evento getEvento() {
 		return evento;
