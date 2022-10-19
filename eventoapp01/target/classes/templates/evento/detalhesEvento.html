@@ -102,6 +102,8 @@
      					<td th:text="${#numbers.formatCurrency(#aggregates.sum(convidados.![proventos]))}"></td>
      					<td colspan="2"><b>Valor Carteita:</b></td>
      					<td th:text="${#numbers.formatCurrency(#aggregates.sum(convidados.![investido]))}"></td>
+     			<!-- 	<td colspan="2"><b>Rent. Carteita:</b></td>
+     				<td th:text="${#numbers.formatCurrency(#aggregates.sum(convidados.![investido])/(#aggregates.sum(convidados.![investido]))}"></td> -->
  					</tr>
 				</tfoot>
 	                    
@@ -398,9 +400,7 @@
 		        "XPSF11": null,
 		        "XTED11": null,
 		        "YUFI11B": null,
-		        "Microsoft": null,
-		        "Google": 'https://placehold.it/250x250'
-		        
+		        	        
 		      },
 		    });
 		  });
